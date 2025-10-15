@@ -59,14 +59,23 @@ questions[currentIndex].text.forEach((element, index) => {
     divForOptions.appendChild(label);
     div.appendChild(divForOptions);
 });
-    if(input.value === true || input.value === false){
+   
+}
+function nextQuestion(){
+    const selected = document.querySelector("input[name='answer']:checked");
+    if(selected){
         const btn = document.createElement("button");
         btn.type = "button";
         btn.classList.add("btn btn-primary");
         btn.innerText = "Next";
+        divToDisplayQuestions.appendChild(btn)
+    }
+    else{ 
+        alert("Choose an option");
     }
 }
 function startQuiz(){
     showQUiz();
+     nextQuestion();
 }
 startQuiz();
