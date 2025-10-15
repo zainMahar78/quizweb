@@ -58,16 +58,15 @@ questions[currentIndex].text.forEach((element, index) => {
     divForOptions.appendChild(input);
     divForOptions.appendChild(label);
     div.appendChild(divForOptions);
-    
 });
+    if(input.value === true || input.value === false){
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.classList.add("btn btn-primary");
+        btn.innerText = "Next";
+    }
 }
 function startQuiz(){
     showQUiz();
 }
 startQuiz();
-//<div class="form-check">
-//   <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1">
-//   <label class="form-check-label" for="radioDefault1">
-    // Default radio
-//   </label>
-// </div>
