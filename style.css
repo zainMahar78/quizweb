@@ -1,0 +1,12 @@
+#divToDisplayQuestions{
+    border: 2px solid black;
+    border-radius: 45px;
+    height: 500px;
+    margin: 15px;
+    position: relative;
+}
+#divToShowScore{
+    position: absolute;
+    top: 0;
+    left: 55px
+}

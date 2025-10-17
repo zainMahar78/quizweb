@@ -43,6 +43,10 @@ function showQUiz() {
     let nextBtn = null;
     divToDisplayQuestions.innerHTML = "";
     const div = document.createElement("div");
+    const divToShowScore= document.createElement("div");
+    divToShowScore.id = "divToShowScore";
+    divToShowScore.innerHTML = `<strong>Score: ${score}</strong>`;
+    divToDisplayQuestions.appendChild(divToShowScore);
     div.innerText = `${currentIndex + 1} ${questions[currentIndex].question}`;
     divToDisplayQuestions.appendChild(div);
     questions[currentIndex].text.forEach((element, index) => {
@@ -64,21 +68,21 @@ function showQUiz() {
                 nextBtn.type = "button";
                 nextBtn.classList.add("btn", "btn-primary");
                 nextBtn.innerText = "Next";
-                divToDisplayQuestions.appendChild(nextBtn)
+                div.appendChild(nextBtn)
+                nextBtn.addEventListener("click", ()=>{
+                    if(input.value === "true"){
+                        score++;
+                    }
+                    if(currentIndex<questions.length-1){
+                        
+                        currentIndex++;
+                        showQUiz();
+                    }
+                    else{
+                        divToDisplayQuestions.innerHTML = `<p>Quiz finished.</br>You got ${score} out of ${questions.length}</p>`;
+                    }
+                })
             }
-            nextBtn.addEventListener("click", ()=>{
-                if(input.value === "true"){
-                    score++;
-                }
-                if(currentIndex<questions.length-1){
-
-                    currentIndex++;
-                    showQUiz();
-                }
-                else{
-                    divToDisplayQuestions.innerHTML = `<p>Quiz finished.</br>You got ${score} out of ${questions.length}</p>`;
-                }
-            })
         });
         divForOptions.appendChild(input);
         divForOptions.appendChild(label);
