@@ -1,12 +1,53 @@
-#divToDisplayQuestions{
+#divToDisplayQuestions {
     border: 2px solid black;
     border-radius: 45px;
     height: 500px;
     margin: 15px;
     position: relative;
 }
-#divToShowScore{
+
+#divToShowScore {
     position: absolute;
     top: 0;
     left: 55px
 }
+
+button {
+    position: relative;
+
+    border: 2px solid black;
+    width: 100px;
+    height: 50px;
+    background-color: aliceblue;
+    border-radius: 50px;
+    overflow: hidden;
+    cursor: pointer;
+    padding-left: 15px;
+    color: black;
+    font-weight: bold;
+    
+    /* margin: 100px; */
+}
+button span{
+    position: relative;
+    
+    
+    z-index: 1;
+}
+button::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: red;
+    border-radius: 50px;
+    z-index: 0;
+    color: white;
+    transition: height 2s ease;
+}
+button:hover::before {
+    height: 100%;
+}
+ 
