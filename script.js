@@ -38,57 +38,38 @@ const questions = [
     }
 ]
 let score = 0;
-let currentIndex = 0;
 function showQUiz() {
-    let nextBtn = null;
     divToDisplayQuestions.innerHTML = "";
-    const div = document.createElement("div");
-    const divToShowScore= document.createElement("div");
-    divToShowScore.id = "divToShowScore";
-    divToShowScore.innerHTML = `<strong>Score: ${score}</strong>`;
-    divToDisplayQuestions.appendChild(divToShowScore);
-    div.innerText = `${currentIndex + 1} ${questions[currentIndex].question}`;
-    divToDisplayQuestions.appendChild(div);
-    questions[currentIndex].text.forEach((element, index) => {
-        const divForOptions = document.createElement("div");
-        divForOptions.classList.add("form-check");
-        const input = document.createElement("input");
-        input.type = "radio";
-        input.name = "answer";
-        input.classList.add("form-check-input");
-        input.id = `radioDefault${index}`;
-        input.value = element.correct;
-        const label = document.createElement("label");
-        label.classList.add("form-check-label");
-        label.htmlFor = input.id;
-        label.innerText = element.answer;
-        input.addEventListener("change", () => {
-            if (!nextBtn) {
-                nextBtn = document.createElement("button");
-                nextBtn.type = "button";
-                nextBtn.classList.add("btn", "btn-primary");
-                nextBtn.innerText = "Next";
-                div.appendChild(nextBtn)
-                nextBtn.addEventListener("click", ()=>{
-                    if(input.value === "true"){
-                        score++;
-                    }
-                    if(currentIndex<questions.length-1){
-                        
-                        currentIndex++;
-                        showQUiz();
-                    }
-                    else{
-                        divToDisplayQuestions.innerHTML = `<p>Quiz finished.</br>You got ${score} out of ${questions.length}</p>`;
-                    }
-                })
-            }
-        });
-        divForOptions.appendChild(input);
-        divForOptions.appendChild(label);
-        div.appendChild(divForOptions);
-    });
+    questions.forEach((ques, idx)=>{
 
+        const div = document.createElement("div");
+        const divToShowScore= document.createElement("div");
+        divToDisplayQuestions.appendChild(divToShowScore);
+        div.innerText = `${idx + 1} ${ques.question}`;
+        divToDisplayQuestions.appendChild(div);
+        ques.text.forEach((element, index) => {
+            const divForOptions = document.createElement("div");
+            divForOptions.classList.add("form-check");
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `answer${idx}`;
+            input.classList.add("form-check-input");
+            input.id = `radioDefault${index}`;
+            input.value = element.correct;
+            const label = document.createElement("label");
+            label.classList.add("form-check-label");
+            label.htmlFor = input.id;
+            label.innerText = element.answer;
+            
+            divForOptions.appendChild(input);
+            divForOptions.appendChild(label);
+            div.appendChild(divForOptions);
+        });
+    });
+   submitBtn = document.createElement("button");
+   submitBtn.innerText = 'submit';
+   submitBtn.id = "submitBtn";
+   divToDisplayQuestions.appendChild(submitBtn);
 }
 function startQuiz() {
     showQUiz();
