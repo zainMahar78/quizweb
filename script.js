@@ -70,8 +70,26 @@ function showQUiz() {
    submitBtn.innerText = 'submit';
    submitBtn.id = "submitBtn";
    divToDisplayQuestions.appendChild(submitBtn);
+//    event handler for submit button
+    submitBtn.addEventListener("click", ()=>{
+        for(let idx=0; idx<questions.length; idx++){
+
+        
+            const selected = document.querySelector(`input[name="answer${idx}"]:checked`);
+           
+            if(selected){
+                if(selected.value === "true"){
+
+                    score++;
+                }
+            }
+            else{
+                alert("Please select all the options.")
+                return;
+            }
+        }
+        divToDisplayQuestions.innerHTML = `<strong>You got ${score} out of ${questions.length}.</strong>`;
+    });
 }
-function startQuiz() {
-    showQUiz();
-}
-startQuiz();
+showQUiz();
+
