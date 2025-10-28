@@ -40,10 +40,10 @@ const questions = [
 let score = 0;
 function showQUiz() {
     divToDisplayQuestions.innerHTML = "";
-    questions.forEach((ques, idx)=>{
+    questions.forEach((ques, idx) => {
 
         const div = document.createElement("div");
-        const divToShowScore= document.createElement("div");
+        const divToShowScore = document.createElement("div");
         divToDisplayQuestions.appendChild(divToShowScore);
         div.innerText = `${idx + 1} ${ques.question}`;
         divToDisplayQuestions.appendChild(div);
@@ -60,31 +60,36 @@ function showQUiz() {
             label.classList.add("form-check-label");
             label.htmlFor = input.id;
             label.innerText = element.answer;
-            
+
             divForOptions.appendChild(input);
             divForOptions.appendChild(label);
             div.appendChild(divForOptions);
         });
     });
-   submitBtn = document.createElement("button");
-   submitBtn.innerText = 'submit';
-   submitBtn.id = "submitBtn";
-   divToDisplayQuestions.appendChild(submitBtn);
-//    event handler for submit button
-    submitBtn.addEventListener("click", ()=>{
-        for(let idx=0; idx<questions.length; idx++){
+    submitBtn = document.createElement("button");
+    submitBtn.innerText = 'submit';
+    submitBtn.id = "submitBtn";
+    divToDisplayQuestions.appendChild(submitBtn);
+    //    event handler for submit button
+    submitBtn.addEventListener("click", () => {
+        for (let idx = 0; idx < questions.length; idx++) {
 
-        
+
             const selected = document.querySelector(`input[name="answer${idx}"]:checked`);
-           
-            if(selected){
-                if(selected.value === "true"){
+
+            if (selected) {
+                if (selected.value === "true") {
 
                     score++;
                 }
             }
-            else{
-                alert("Please select all the options.")
+            else {
+                const alertDiv = document.createElement("div");
+                alertDiv.classList.add("alert", "alert-warning", "alert-dismissible", "fade", "show", "fixed-alert");
+                alertDiv.role = "alert";
+                alertDiv.innerHTML = `<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
+                document.body.appendChild(alertDiv);
                 return;
             }
         }
